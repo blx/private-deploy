@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Make a new SSH key to use for repo `$1`, then add it
+# to .ssh/config with short Host of `repo name`.
+#
+# Eg. ./mkdeploykey blx/private-deploy
+# will make a key called "private-deploy_rsa" to use with
+# short Host of "private-deploy".
+
+b=$(basename $1)
+f="~/.ssh/deploy/${b}_rsa"
+
+conf="~/.ssh/config"
+
+ssh-keygen -t rsa -C "Deploy key for $b" -f "$f" -N ''
+
+echo >> $conf
+echo "Host $b github.com" >> $conf
+echo "    HostName github.com" >> $conf
+echo "    IdentityFile $f" >> $conf
+
+echo
+cat "${f}.pub"
