@@ -8,9 +8,10 @@
 # short Host of "private-deploy".
 
 b=$(basename $1)
-f="~/.ssh/deploy/${b}_rsa"
+s="${HOME}/.ssh"
+f="${s}/deploy/${b}_rsa"
 
-conf="~/.ssh/config"
+conf="${s}/config"
 
 ssh-keygen -t rsa -C "Deploy key for $b" -f "$f" -N ''
 
