@@ -2,12 +2,13 @@
 
 # git-clone a repo using keys setup by mkdeploykey
 
-b=$(basename $1)
+repo=$1
+b=$(basename $repo)
 
 # Pass the rest of the arguments to git
 shift
 
-c="git clone git@${b}:${1} $@"
+c="git clone git@${b}:${repo}.git $@"
 
 echo $c
 eval $c
